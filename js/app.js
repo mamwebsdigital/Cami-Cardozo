@@ -85,6 +85,7 @@ const container = document.getElementById("products-container");
 products.forEach(product => {
   const card = document.createElement("div");
   card.classList.add("card");
+  card.dataset.category = product.category;
 
   // Imagen principal (carrusel)
   const carousel = document.createElement("div");
@@ -168,6 +169,55 @@ products.forEach(product => {
   container.appendChild(card);
 });
 
+// ================== FILTROS Y BUSCADOR ==================
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("searchInput");
+  const searchBtn = document.getElementById("searchBtn");
+  const categoryBtns = document.querySelectorAll(".category-btn");
+
+  // Función de búsqueda
+  function searchProducts() {
+    const query = searchInput.value.toLowerCase();
+    document.querySelectorAll(".card").forEach(card => {
+      const title = card.querySelector("h3").textContent.toLowerCase();
+      if (title.includes(query)) {
+        card.style.display = "flex";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  }
+
+  // Click en buscar
+  if (searchBtn) {
+    searchBtn.addEventListener("click", searchProducts);
+  }
+
+  // Enter en el input
+  if (searchInput) {
+    searchInput.addEventListener("keyup", e => {
+      if (e.key === "Enter") searchProducts();
+    });
+  }
+
+  // Filtro por categoría
+  categoryBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      categoryBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const category = btn.dataset.category;
+      document.querySelectorAll(".card").forEach(card => {
+        if (category === "all" || card.dataset.category === category) {
+          card.style.display = "flex";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    });
+  });
+});
+
 // ================== NOTIFICACIÓN (modal flotante) ==================
 function showCartNotif() {
   const notifBox = document.getElementById("cartNotifBox");
@@ -203,3 +253,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+

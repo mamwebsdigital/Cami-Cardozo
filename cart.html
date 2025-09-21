@@ -14,7 +14,7 @@
     <div class="logo">
       <img src="/img/Logo.png" alt="Campanita Temari Logo">
     </div>
-    <nav class="nav">
+    <nav class="nav-cart">
       <a href="index.html">Inicio</a>
     </nav>
   </header>
@@ -23,7 +23,10 @@
   <h2>🛒 Carrito</h2>
   <ul id="cart-list"></ul>
   <p id="cart-total">Total: $0</p>
-  <button class="btn" id="btnClear">Vaciar carrito</button>
+  <div class="compra">
+      <button class="btn btn-whatsapp"  type="button">Finalizar compra</button>
+      <button class="btn" id="btnClear">Vaciar carrito</button>
+  </div>
 </section>
 
 <main class="container" style="padding:24px 0">
@@ -75,7 +78,6 @@
     </div>
   </form>
   <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
-     <button id="checkout" class="btn">Comprar por whatsapp</button>
   </div>
 </div>
 </main>
