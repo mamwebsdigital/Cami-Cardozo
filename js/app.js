@@ -146,7 +146,7 @@ products.forEach(product => {
   info.classList.add("info");
   info.innerHTML = `
     <h3>${product.name}</h3>
-    <p>Talle: ${product.textotalla}</p>
+    <p>Talla: ${product.textotalla}</p>
     <p><strong>$${product.price}</strong></p>
     <button class="add-btn">Agregar al carrito</button>
   `;
@@ -253,4 +253,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
 
