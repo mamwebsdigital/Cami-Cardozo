@@ -1,10 +1,13 @@
 let cart = [];
 
+// ================== CARRITO ==================
 // Cargar carrito si existe
 function loadCart() {
   const saved = localStorage.getItem("cart");
   if (saved) {
     cart = JSON.parse(saved);
+  } else {
+    cart = [];
   }
 }
 
@@ -15,21 +18,19 @@ function saveCart() {
 
 // Agregar producto (con variante)
 function addToCart(product) {
-  // buscar por id y variante (selectedImage)
   const itemInCart = cart.find(
     p => p.id === product.id && p.selectedImage === product.selectedImage
   );
 
   if (itemInCart) {
-    itemInCart.quantity += 1; 
+    itemInCart.quantity += 1;
   } else {
-    cart.push(product);      
+    cart.push(product);
   }
 
   saveCart();
   updateCartCount();
 }
-
 
 // Actualizar numerito del carrito en navbar
 function updateCartCount() {
@@ -38,27 +39,6 @@ function updateCartCount() {
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     cartCount.textContent = totalItems;
   }
-}
-
-// Inicializar carrito
-document.addEventListener("DOMContentLoaded", () => {
-  loadCart();
-  updateCartCount();
-});
-
-
-// ================== CARRITO  ==================
-function loadCart() {
-  const saved = localStorage.getItem("cart");
-  if (saved) {
-    cart = JSON.parse(saved);
-  } else {
-    cart = [];
-  }
-}
-
-function saveCart() {
-  localStorage.setItem("cart", JSON.stringify(cart));
 }
 
 // ================== MODAL DE IMÁGENES ==================
@@ -115,19 +95,17 @@ products.forEach(product => {
   img.alt = product.name;
   carousel.appendChild(img);
 
-let currentIndex = 0;
-let carouselInterval;
-let userSelected = false;
+  let currentIndex = 0;
+  let carouselInterval;
+  let userSelected = false;
 
-// Carrusel automático
-carouselInterval = setInterval(() => {
-  if (!userSelected) {  // solo corre si no hubo click
-    currentIndex = (currentIndex + 1) % product.images.length;
-    img.src = product.images[currentIndex];
-    // 🚫 ya no toca las miniaturas
-  }
-}, 3000);
-
+  // Carrusel automático
+  carouselInterval = setInterval(() => {
+    if (!userSelected) {
+      currentIndex = (currentIndex + 1) % product.images.length;
+      img.src = product.images[currentIndex];
+    }
+  }, 3000);
 
   // Abrir modal al hacer click en la imagen principal
   carousel.addEventListener("click", () => {
@@ -138,32 +116,29 @@ carouselInterval = setInterval(() => {
   const thumbs = document.createElement("div");
   thumbs.classList.add("thumbnails");
 
- product.images.forEach((thumbSrc, index) => {
-  const thumb = document.createElement("img");
-  thumb.src = thumbSrc;
-  thumb.alt = `${product.name} variante ${index + 1}`;
-  thumb.classList.add("thumb");
+  product.images.forEach((thumbSrc, index) => {
+    const thumb = document.createElement("img");
+    thumb.src = thumbSrc;
+    thumb.alt = `${product.name} variante ${index + 1}`;
+    thumb.classList.add("thumb");
 
-thumb.addEventListener("click", () => {
-  img.src = thumbSrc;
-  currentIndex = index;
+    thumb.addEventListener("click", () => {
+      img.src = thumbSrc;
+      currentIndex = index;
 
-  // Quitar selección previa
-  thumbs.querySelectorAll(".thumb").forEach(t => t.classList.remove("selected"));
-  thumb.classList.add("selected");
+      thumbs.querySelectorAll(".thumb").forEach(t => t.classList.remove("selected"));
+      thumb.classList.add("selected");
 
-  // Marcar que el usuario ya eligió y detener el carrusel
-  userSelected = true;
-  clearInterval(carouselInterval);
-});
+      userSelected = true;
+      clearInterval(carouselInterval);
+    });
 
-  // Doble click en miniatura = abrir modal
-  thumb.addEventListener("dblclick", () => {
-    openModal(product.images, index);
+    thumb.addEventListener("dblclick", () => {
+      openModal(product.images, index);
+    });
+
+    thumbs.appendChild(thumb);
   });
-
-  thumbs.appendChild(thumb);
-});
 
   // Info del producto
   const info = document.createElement("div");
@@ -175,7 +150,6 @@ thumb.addEventListener("click", () => {
     <button class="add-btn">Agregar al carrito</button>
   `;
 
-  // Agregar al carrito con variante seleccionada
   const addBtn = info.querySelector(".add-btn");
   addBtn.addEventListener("click", () => {
     const selectedImage = product.images[currentIndex];
@@ -185,6 +159,7 @@ thumb.addEventListener("click", () => {
       quantity: 1
     };
     addToCart(item);
+    showCartNotif();
   });
 
   card.appendChild(carousel);
@@ -193,8 +168,38 @@ thumb.addEventListener("click", () => {
   container.appendChild(card);
 });
 
+// ================== NOTIFICACIÓN (modal flotante) ==================
+function showCartNotif() {
+  const notifBox = document.getElementById("cartNotifBox");
+  if (!notifBox) return;
 
+  notifBox.classList.add("show"); // Mostrar modal
 
+  // Cerrar al hacer click en "Seguir comprando"
+  const keepShopping = document.getElementById("keepShopping");
+  if (keepShopping) {
+    keepShopping.onclick = () => {
+      notifBox.classList.remove("show");
+    };
+  }
+
+  // Cerrar al hacer click fuera del contenido
+  notifBox.addEventListener("click", (e) => {
+    if (e.target.id === "cartNotifBox") {
+      notifBox.classList.remove("show");
+    }
+  });
+}
+
+// ================== INICIALIZAR ==================
 document.addEventListener("DOMContentLoaded", () => {
+  loadCart();
   updateCartCount();
+
+  const keepShopping = document.getElementById("keepShopping");
+  if (keepShopping) {
+    keepShopping.addEventListener("click", () => {
+      document.getElementById("cartNotifBox").classList.remove("show");
+    });
+  }
 });

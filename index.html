@@ -6,6 +6,7 @@
   <link rel="icon" type="image/png" href="/img/Logo.png">
   <title>Campanita Temari Showroom</title>
   <link rel="stylesheet" href="/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- Header con logo y menú -->
@@ -13,20 +14,41 @@
     <div class="logo">
       <img src="/img/Logo.png" alt="Campanita Temari Logo">
     </div>
+    <!-- Menú normal (desktop) -->
     <nav class="nav">
       <a href="#hero">Inicio</a>
       <a href="#products">Productos</a>
       <a href="cart.html">Carrito 🛒 (<span id="cart-count">0</span>)</a>
       <a href="#contact">Contacto</a>
     </nav>
-  </header>
+
+    <!-- Botón hamburguesa (solo mobile) -->
+  <button class="hamburger" id="hamburgerBtn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- Overlay + menú -->
+  <div class="mobile-overlay" id="mobileOverlay">
+    <div class="mobile-menu" id="mobileMenu">
+      <button class="close-btn" id="closeBtn">&times;</button>
+      <a href="#hero">Inicio</a>
+      <a href="#products">Productos</a>
+      <a href="cart.html">Carrito 🛒</a>
+      <a href="#contact">Contacto</a>
+    </div>
+  </div>
+</header>
 
   <!-- Hero principal -->
   <section id="hero" class="hero">
     <div class="hero-text">
       <h1>✨ Campanita Temari Showroom ✨</h1>
       <p>Moda urbana y deportiva para hombres y mujeres. <br> 
-      ¡Tu estilo, tu identidad, siempre disponible online!</p>
+      ¡Tu estilo, tu identidad, siempre disponible online!<br>
+      Realizamos envios a todo el pais, incluida tu ciudad.</p>
+
     </div>
   </section>
 
@@ -47,21 +69,268 @@
     </div>
   </div>
 
+  <!-- Sección Beneficios -->
+<section id="benefits" class="benefits">
+  <h2>✨ Nuestros Beneficios</h2>
+  <div class="benefits-grid">
+    
+    <div class="benefit-card">
+      <div class="icon">
+        <!-- 💬 Atención personalizada -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M21 12c0 4.418-4.03 8-9 8-1.1 0-2.15-.18-3.1-.5L3 21l1.6-3.2C3.6 16.5 3 14.8 3 13c0-4.418 4.03-8 9-8s9 3.582 9 7z"/>
+        </svg>
+      </div>
+      <h3>Atención personalizada</h3>
+      <p>Estamos disponibles para ayudarte por WhatsApp en cada paso de tu compra.</p>
+    </div>
+
+    <div class="benefit-card">
+      <div class="icon">
+        <!-- 💳 Pagos -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+          <line x1="1" y1="10" x2="23" y2="10"></line>
+        </svg>
+      </div>
+      <h3>Pagos Seguros</h3>
+      <p>Con tarjeta, transferencia o efectivo al recibir tu pedido.</p>
+    </div>
+
+    <div class="benefit-card">
+      <div class="icon">
+        <!-- 👕 Talles -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M16 3h-1a4 4 0 0 1-6 0h-1l-3 2-2 3 3 2v11h12V10l3-2-2-3-3-2z"/>
+        </svg>
+      </div>
+      <h3>Variedad de talles</h3>
+      <p>Encontrá el talle ideal para vos en nuestros conjuntos.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Sección Envíos -->
+<section id="shipping" class="shipping">
+  <div class="shipping-content">
+    <!-- Ícono camión -->
+    <div class="shipping-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="3" width="15" height="13"></rect>
+        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+        <circle cx="5.5" cy="18.5" r="2.5"></circle>
+        <circle cx="18.5" cy="18.5" r="2.5"></circle>
+      </svg>
+    </div>
+    <!-- Texto -->
+    <div class="shipping-text">
+      <h2>Envíos a todo el país</h2>
+      <p>
+        Recibí tus compras estés donde estés 🚀  
+        Envíos rápidos, seguros y confiables con seguimiento en tiempo real.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Seccion Clientes -->
+<section id="testimonials" class="testimonials">
+  <h2>💬 Lo que dicen nuestras clientas</h2>
+  <div class="testimonial-carousel">
+    <div class="testimonial active">
+      <p>"La ropa es de excelente calidad y los talles calzan perfecto. El envío llegó rapidísimo."</p>
+      <h4>- Mariana G.</h4>
+    </div>
+    <div class="testimonial">
+      <p>"Me encantaron los conjuntos deportivos, cómodos y súper modernos. ¡Voy a volver a comprar!"</p>
+      <h4>- Sofía R.</h4>
+    </div>
+    <div class="testimonial">
+      <p>"La atención fue muy personalizada, me ayudaron a elegir mi talle y el pedido llegó impecable."</p>
+      <h4>- Carla D.</h4>
+    </div>
+    <div class="testimonial">
+      <p>"Hermosos productos, excelente relación precio/calidad. Lo recomiendo a todas."</p>
+      <h4>- Valeria M.</h4>
+    </div>
+  </div>
+</section>
+
+<!-- Preguntas frecuentes -->
+<section id="faq" class="faq">
+  <h2>❓ Preguntas frecuentes</h2>
+  <details>
+    <summary>¿Cuánto tarda el envío?</summary>
+    <p>De 2 a 5 días hábiles según tu ubicación.</p>
+  </details>
+  <details>
+    <summary>¿Cómo sé qué talle elegir?</summary>
+    <p>Te ayudamos por WhatsApp con la tabla de medidas y asesoramiento.</p>
+  </details>
+  <details>
+    <summary>¿Qué formas de pago aceptan?</summary>
+    <p>Transferencia bancaria, Mercado Pago y efectivo en el showroom.</p>
+  </details>
+</section>
+
   <!-- Contacto -->
   <section id="contact" class="contact">
-    <h2>📲 Contacto</h2>
-    <p>Escribinos por WhatsApp para consultas o pedidos:</p>
-    <a href="https://wa.me/549XXXXXXXXXX" target="_blank" class="btn">Hablar por WhatsApp</a>
-  </section>
+  <h2>📲 Contacto</h2>
+  <div class="contact-container">
+    
+    <!-- Columna izquierda: información de contacto -->
+    <div class="contact-info">
+      <p>Puedes comunicarte con nosotros a través de:</p>
+      <ul>
+        <li>
+          <a href="https://wa.me/5493765136870" target="_blank">📱 WhatsApp: +54 9 3765136870</a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/showroomcampanitatemari" target="_blank">📸 Instagram: @showroomcampanitatemari</a>
+        </li>
+        <li>
+          <a href="mailto:showroom@campanitatemari.com">📧 showroom@gmail.com</a>
+        </li>
+      </ul>
+      <p><strong>📍 Dirección:</strong> Barrio Santa Clara 2 de Garupa, Misiones, Argentina</p>
+    </div>
+    <!-- Columna derecha: mapa -->
+    <div class="contact-map">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3540.3921081508424!2d-55.84780187376985!3d-27.45704961616888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9457c77e46d9c7c5%3A0xa444596b9cc3992b!2sSanta%20Clara%20II%2C%20N3304%20Garupa%2C%20Misiones!5e0!3m2!1ses-419!2sar!4v1758472401634!5m2!1ses-419!2sar"
+        width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <p>&copy; 2025 Campanita Temari Showroom. Todos los derechos reservados.</p>
-  </footer>
+  </div>
+</section>
 
-  <!-- Scripts -->
-  <script src="dataproducts.js"></script>
-  <script src="/js/app.js"></script>
+  <!-- CTA -->
+<section class="cta">
+  <h2>¿Listo para renovar tu estilo?</h2>
+  <a href="#products" class="btn">Ver productos</a>
+</section>
+
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- Columna 1: Logo y descripción -->
+    <div class="footer-col">
+      <img src="/img/Logo.png" alt="Campanita Temari Logo" class="footer-logo">
+      <p>Moda urbana y deportiva. Envíos a todo el país con la mejor atención personalizada.</p>
+    </div>
+
+    <!-- Columna 2: Navegación -->
+    <div class="footer-col">
+      <h4>Enlaces rápidos</h4>
+      <ul>
+        <li><a href="index.html#hero">Inicio</a></li>
+        <li><a href="index.html#products">Productos</a></li>
+        <li><a href="cart.html">Carrito</a></li>
+        <li><a href="index.html#contact">Contacto</a></li>
+      </ul>
+    </div>
+
+    <!-- Columna 3: Contacto -->
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <p>📱 <a href="https://wa.me/5493765136870" target="_blank">WhatsApp</a></p>
+      <p>📸 <a href="https://www.instagram.com/showroomcampanitatemari" target="_blank">Instagram</a></p>
+      <p>📧 <a href="mailto:showroom@campanitatemari.com">showroom@gmail.com</a></p>
+      <p>📍 Barrio Santa Clara 2 de Garupa, Misiones, Argentina</p>
+    </div>
+
+    <!-- Columna 4: Legal -->
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <p>&copy; 2025 Campanita Temari. Todos los derechos reservados.</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    Diseñado con 💖 por Campanita Temari
+  </div>
+</footer>
+
+<!-- Botones flotantes -->
+<div class="social-float">
+  <a href="https://wa.me/5493765136870" target="_blank" class="float-btn whatsapp" aria-label="WhatsApp">
+    <img src="img/whatsapp.svg" alt="WhatsApp">
+  </a>
+  <a href="https://www.instagram.com/showroomcampanitatemari" target="_blank" class="float-btn instagram" aria-label="Instagram">
+    <img src="img/instagram.svg" alt="Instagram">
+  </a>
+</div>
+
+<!-- Notificación de carrito -->
+<div id="cartNotifBox" class="cart-notif">
+  <div class="cart-notif-content">
+    <p>✅ Producto agregado al carrito</p>
+    <div class="cart-notif-actions">
+      <a href="cart.html" class="btn">Ir al carrito</a>
+      <button id="keepShopping" class="btn btn--ghost">Seguir comprando</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Scripts -->
+<script src="dataproducts.js"></script>
+<script src="/js/app.js"></script>
+
+<!-- Menu hamburguesa -->
+<script>
+ (() => {
+  const hamburgerBtn = document.getElementById("hamburgerBtn");
+  const mobileOverlay = document.getElementById("mobileOverlay");
+  const closeBtn = document.getElementById("closeBtn");
+
+  // Abrir menú
+  hamburgerBtn.addEventListener("click", () => {
+    mobileOverlay.classList.add("open");
+  });
+
+  // Cerrar con botón
+  closeBtn.addEventListener("click", () => {
+    mobileOverlay.classList.remove("open");
+  });
+
+  // Cerrar al tocar fuera del menú
+  mobileOverlay.addEventListener("click", (e) => {
+    if (e.target === mobileOverlay) {
+      mobileOverlay.classList.remove("open");
+    }
+  });
+
+  // Cerrar al hacer click en un enlace
+  document.querySelectorAll(".mobile-menu a").forEach(link => {
+    link.addEventListener("click", () => {
+      mobileOverlay.classList.remove("open");
+    });
+  });
+})();
+</script>
+
+<!-- Carrusel clientes -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const testimonials = document.querySelectorAll(".testimonial");
+      let index = 0;
+
+      function showTestimonial(i) {
+        testimonials.forEach((t, idx) => {
+          t.classList.toggle("active", idx === i);
+        });
+      }
+
+      setInterval(() => {
+        index = (index + 1) % testimonials.length;
+        showTestimonial(index);
+      }, 4000); // cambia cada 4 segundos
+    });
+</script>
+
 </body>
 </html>
 

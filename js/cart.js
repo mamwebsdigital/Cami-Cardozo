@@ -133,7 +133,7 @@ function checkout() {
 
   message += `\nTotal: $${total}`;
 
-  const phone = "549XXXXXXXXXX"; // <-- tu número con código de país
+  const phone = "5493765136870"; //
   const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
   window.open(url, "_blank");
@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (action === "decrease") {
           item.quantity--;
           if (item.quantity <= 0) {
-            cart = cart.filter(p => p.id !== id); // eliminar si llega a 0
+            cart = cart.filter(p => p.id !== id); 
           }
         }
         saveCart();
