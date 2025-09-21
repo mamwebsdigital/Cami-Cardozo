@@ -3,7 +3,7 @@ const products = [
   {
     id: 1,
     name: "Conjuntos deportivos dama",
-    talles: ["1","2","3","4","5"],
+    tallas: ["1","2","3","4","5"],
     textotalla: "1 al 5",
     price: 10800,
     category: "mujer",
@@ -12,7 +12,7 @@ const products = [
   {
     id: 2,
     name: "Remeras morley",
-    talles: [],
+    tallas: [],
     textotalla: "Unico",
     price: 4700,
     category: "mujer",
@@ -21,7 +21,7 @@ const products = [
   {
     id: 3,
     name: "Remeras lisa logo bordado",
-    talles: ["1","2","3","4","5","6"],
+    tallas: ["1","2","3","4","5","6"],
     textotalla: "1 al 6",
     price: 5000,
     category: "hombre",
@@ -30,7 +30,7 @@ const products = [
   {
     id: 4,
     name: "Remeras wafle",
-    talles: ["1","2","3","4","5","6"],
+    tallas: ["1","2","3","4","5","6"],
     textotalla: "1 al 6",
     price: 7500,
     category: "hombre",
@@ -39,7 +39,7 @@ const products = [
   {
     id: 5,
     name: "Calzas cortas",
-    talles: ["1","2","3","4","5","6"],
+    tallas: ["1","2","3","4","5","6"],
     textotalla: "1 al 6",
     price: 4700,
     category: "mujer",
@@ -48,7 +48,7 @@ const products = [
   {
     id: 6,
     name: "Short jean mom con flecos",
-    talles: ["36","38","40","42","44","46","48",],
+    tallas: ["36","38","40","42","44","46","48",],
     textotalla: "36 al 48",
     price: 10800,
     category: "mujer",
@@ -57,7 +57,7 @@ const products = [
   {
     id: 7,
     name: "Short de básquet",
-    talles: ["1","2","3","4","5","6"],
+    tallas: ["1","2","3","4","5","6"],
     textotalla: "1 al 6",
     price: 5500,
     category: "hombre",
@@ -66,7 +66,7 @@ const products = [
   {
     id: 8,
     name: "Bodys elastizados",
-    talles: [],
+    tallas: [],
     textotalla: "Unico",
     price: 6000,
     category: "mujer",
@@ -75,7 +75,7 @@ const products = [
   {
     id: 9,
     name: "Chombas",
-    talles: ["1","2","3","4","5","6"],
+    tallas: ["1","2","3","4","5","6"],
     textotalla: "1 al 6",
     price: 7000,
     category: "hombre",
@@ -84,7 +84,7 @@ const products = [
   {
     id: 10,
     name: "Chalecos de bengalina",
-    talles: [],
+    tallas: [],
     textotalla: "Unico",
     price: 6200,
     category: "mujer",
@@ -93,7 +93,7 @@ const products = [
   {
     id: 11,
     name: "Baggy cargo 2 en 1",
-    talles: ["1","2","3","4"],
+    tallas: ["1","2","3","4"],
     textotalla: "1 al 4",
     price: 15500,
     category: "mujer",
@@ -102,7 +102,7 @@ const products = [
   {
     id: 12,
     name: "Biker",
-    talles: ["1","2","3","4","5","6"],
+    tallas: ["1","2","3","4","5","6"],
     textotalla: "1 al 6",
     price: 6000,
     category: "mujer",
@@ -111,7 +111,7 @@ const products = [
   {
     id: 13,
     name: "Remeras para dama (algodon estampa)",
-    talles: ["S","M","L","XL","XXL"],
+    tallas: ["S","M","L","XL","XXL"],
     textotalla: "S al XXL",
     price: 7000,
     category: "mujer",
@@ -120,7 +120,7 @@ const products = [
   {
     id: 14,
     name: "Musculosa tiras",
-    talles: [],
+    tallas: [],
     textotalla: "Unico",
     price: 3800,
     category: "mujer",
@@ -129,10 +129,11 @@ const products = [
   {
     id: 15,
     name: "Modal con frunce",
-    talles: [],
+    tallas: [],
     textotalla: "Unico",
     price: 4500,
     category: "mujer",
     images: ["img/modal1.jpg","img/modal2.jpg","img/modal3.jpg"]
   },
 ];
+
