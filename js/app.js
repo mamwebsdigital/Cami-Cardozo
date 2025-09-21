@@ -1,74 +1,76 @@
 let cart = [];
 
-// ================== CARRITO ==================
-
-// Agregar al carrito con cantidades
-document.addEventListener("click", e => {
-  if (e.target.classList.contains("add-btn")) {
-    const id = parseInt(e.target.dataset.id);
-    const product = products.find(p => p.id === id);
-
-    const itemInCart = cart.find(item => item.id === id);
-
-    if (itemInCart) {
-      itemInCart.quantity += 1;
-    } else {
-      cart.push({ ...product, quantity: 1 });
-    }
-
-    renderCart();
+// Cargar carrito si existe
+function loadCart() {
+  const saved = localStorage.getItem("cart");
+  if (saved) {
+    cart = JSON.parse(saved);
   }
-});
-
-// Render carrito
-function renderCart() {
-  const cartList = document.getElementById("cart-list");
-  const cartCount = document.getElementById("cart-count");
-  const cartTotal = document.getElementById("cart-total");
-
-  cartList.innerHTML = "";
-  let total = 0;
-  let itemsCount = 0;
-
-  cart.forEach(item => {
-    const li = document.createElement("li");
-    li.textContent = `${item.name} (x${item.quantity}) - $${item.price * item.quantity}`;
-    cartList.appendChild(li);
-
-    total += item.price * item.quantity;
-    itemsCount += item.quantity;
-  });
-
-  cartCount.textContent = itemsCount;
-  cartTotal.textContent = `Total: $${total}`;
 }
 
-// Finalizar compra por WhatsApp
-document.getElementById("checkout").addEventListener("click", () => {
-  if (cart.length === 0) {
-    alert("El carrito está vacío");
-    return;
+// Guardar carrito
+function saveCart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+// Agregar producto (con variante)
+function addToCart(product) {
+  // buscar por id y variante (selectedImage)
+  const itemInCart = cart.find(
+    p => p.id === product.id && p.selectedImage === product.selectedImage
+  );
+
+  if (itemInCart) {
+    itemInCart.quantity += 1; 
+  } else {
+    cart.push(product);      
   }
 
-  let message = "Hola! Quiero hacer un pedido:\n";
-  let total = 0;
+  saveCart();
+  updateCartCount();
+}
 
-  cart.forEach(item => {
-    message += `- ${item.name} (x${item.quantity}) - $${item.price * item.quantity}\n`;
-    total += item.price * item.quantity;
-  });
 
-  message += `\nTotal: $${total}`;
+// Actualizar numerito del carrito en navbar
+function updateCartCount() {
+  const cartCount = document.getElementById("cart-count");
+  if (cartCount) {
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartCount.textContent = totalItems;
+  }
+}
 
-  const phone = "549XXXXXXXXXX"; // <-- tu número con código de país
-  const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-
-  window.open(url, "_blank");
+// Inicializar carrito
+document.addEventListener("DOMContentLoaded", () => {
+  loadCart();
+  updateCartCount();
 });
+
+
+// ================== CARRITO  ==================
+function loadCart() {
+  const saved = localStorage.getItem("cart");
+  if (saved) {
+    cart = JSON.parse(saved);
+  } else {
+    cart = [];
+  }
+}
+
+function saveCart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
 
 // ================== MODAL DE IMÁGENES ==================
 let currentImages = [];
 let modalIndex = 0;
+
+function openModal(images, index) {
+  currentImages = images;
+  modalIndex = index;
+  modal.style.display = "flex";
+  showImage(modalIndex);
+}
 
 function showImage(index) {
   const temp = new Image();
@@ -78,14 +80,6 @@ function showImage(index) {
   temp.src = currentImages[index];
 }
 
-
-function openModal(images, index) {
-  currentImages = images;
-  modalIndex = index;
-  modal.style.display = "flex";
-  showImage(modalIndex);
-}
-
 const modal = document.getElementById("modal");
 const modalImg = document.getElementById("modal-img");
 const closeBtn = document.querySelector(".close");
@@ -93,29 +87,26 @@ const prevBtn = document.querySelector(".prev");
 const nextBtn = document.querySelector(".next");
 
 closeBtn.onclick = () => modal.style.display = "none";
-
 prevBtn.onclick = () => {
   modalIndex = (modalIndex - 1 + currentImages.length) % currentImages.length;
   showImage(modalIndex);
 };
-
 nextBtn.onclick = () => {
   modalIndex = (modalIndex + 1) % currentImages.length;
   showImage(modalIndex);
 };
-
 modal.onclick = (e) => {
   if (e.target === modal) modal.style.display = "none";
 };
 
-// Render de productos
+// ================== RENDER DE PRODUCTOS ==================
 const container = document.getElementById("products-container");
 
 products.forEach(product => {
   const card = document.createElement("div");
   card.classList.add("card");
 
-  // Carrusel de imágenes (con cambio automático)
+  // Imagen principal (carrusel)
   const carousel = document.createElement("div");
   carousel.classList.add("carousel");
 
@@ -124,28 +115,86 @@ products.forEach(product => {
   img.alt = product.name;
   carousel.appendChild(img);
 
-  let currentIndex = 0;
-  setInterval(() => {
+let currentIndex = 0;
+let carouselInterval;
+let userSelected = false;
+
+// Carrusel automático
+carouselInterval = setInterval(() => {
+  if (!userSelected) {  // solo corre si no hubo click
     currentIndex = (currentIndex + 1) % product.images.length;
     img.src = product.images[currentIndex];
-  }, 3000);
+    // 🚫 ya no toca las miniaturas
+  }
+}, 3000);
+
+
+  // Abrir modal al hacer click en la imagen principal
+  carousel.addEventListener("click", () => {
+    openModal(product.images, currentIndex);
+  });
+
+  // Miniaturas
+  const thumbs = document.createElement("div");
+  thumbs.classList.add("thumbnails");
+
+ product.images.forEach((thumbSrc, index) => {
+  const thumb = document.createElement("img");
+  thumb.src = thumbSrc;
+  thumb.alt = `${product.name} variante ${index + 1}`;
+  thumb.classList.add("thumb");
+
+thumb.addEventListener("click", () => {
+  img.src = thumbSrc;
+  currentIndex = index;
+
+  // Quitar selección previa
+  thumbs.querySelectorAll(".thumb").forEach(t => t.classList.remove("selected"));
+  thumb.classList.add("selected");
+
+  // Marcar que el usuario ya eligió y detener el carrusel
+  userSelected = true;
+  clearInterval(carouselInterval);
+});
+
+  // Doble click en miniatura = abrir modal
+  thumb.addEventListener("dblclick", () => {
+    openModal(product.images, index);
+  });
+
+  thumbs.appendChild(thumb);
+});
 
   // Info del producto
   const info = document.createElement("div");
   info.classList.add("info");
   info.innerHTML = `
     <h3>${product.name}</h3>
-    <p>Talle del ${product.talla}</p>
+    <p>Talle: ${product.textotalla}</p>
     <p><strong>$${product.price}</strong></p>
-    <button class="add-btn" data-id="${product.id}">Agregar al carrito</button>
+    <button class="add-btn">Agregar al carrito</button>
   `;
 
+  // Agregar al carrito con variante seleccionada
+  const addBtn = info.querySelector(".add-btn");
+  addBtn.addEventListener("click", () => {
+    const selectedImage = product.images[currentIndex];
+    const item = {
+      ...product,
+      selectedImage,
+      quantity: 1
+    };
+    addToCart(item);
+  });
+
   card.appendChild(carousel);
+  card.appendChild(thumbs);
   card.appendChild(info);
   container.appendChild(card);
+});
 
-  // Abrir modal al hacer clic en la imagen
-  carousel.addEventListener("click", () => {
-    openModal(product.images, currentIndex);
-  });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  updateCartCount();
 });
