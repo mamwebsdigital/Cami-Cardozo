@@ -35,22 +35,22 @@ function renderCart() {
     const info = document.createElement("div");
     info.classList.add("cart-info");
     info.innerHTML = `
-      <p><strong>${item.name}</strong> (Talle del ${item.textotalla})</p>
+      <p><strong>${item.name}</strong> (Talla del ${item.textotalla})</p>
       <p>Precio: $${item.price}</p>
     `;
     li.appendChild(info);
 
     // Select de talles (si tiene)
-    if (Array.isArray(item.talles) && item.talles.length > 0) {
+    if (Array.isArray(item.tallas) && item.tallas.length > 0) {
       const select = document.createElement("select");
-      select.classList.add("talle-select");
+      select.classList.add("talla-select");
 
       item.talles.forEach(talle => {
         const option = document.createElement("option");
         option.value = talle;
         option.textContent = talle;
 
-        if (item.selectedTalle === talle) {
+        if (item.selectedTalla === talla) {
           option.selected = true;
         }
 
@@ -58,7 +58,7 @@ function renderCart() {
       });
 
       select.addEventListener("change", e => {
-        item.selectedTalle = e.target.value;
+        item.selectedTalla = e.target.value;
         saveCart();
       });
 
@@ -266,3 +266,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
