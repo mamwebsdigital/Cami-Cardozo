@@ -43,12 +43,12 @@ function renderCart() {
     // Select de talles (si tiene)
     if (Array.isArray(item.tallas) && item.tallas.length > 0) {
       const select = document.createElement("select");
-      select.classList.add("talla-select");
+      select.classList.add("tallas-select");
 
-      item.talles.forEach(talle => {
+      item.tallas.forEach(talla => {
         const option = document.createElement("option");
-        option.value = talle;
-        option.textContent = talle;
+        option.value = talla;
+        option.textContent = talla;
 
         if (item.selectedTalla === talla) {
           option.selected = true;
@@ -164,7 +164,7 @@ function checkout(event) {
   cart.forEach(item => {
     message += `- ${item.name} (x${item.quantity}) - $${item.price * item.quantity}`;
     if (item.selectedTalle) {
-      message += ` | Talle: ${item.selectedTalle}`;
+      message += ` | Talla: ${item.selectedTalla}`;
     }
     message += "\n";
     total += item.price * item.quantity;
@@ -266,4 +266,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
