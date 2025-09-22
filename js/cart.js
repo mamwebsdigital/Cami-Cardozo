@@ -163,7 +163,7 @@ function checkout(event) {
 
   cart.forEach(item => {
     message += `- ${item.name} (x${item.quantity}) - $${item.price * item.quantity}`;
-    if (item.selectedTalle) {
+    if (item.selectedTalla) {
       message += ` | Talla: ${item.selectedTalla}`;
     }
     message += "\n";
@@ -266,5 +266,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
