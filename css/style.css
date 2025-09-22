@@ -679,7 +679,7 @@ h3 { font-size: 1.4rem; }
   margin: 4px 0;
 }
 
-.talla-select {
+.tallas-select {
   padding: 6px 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
@@ -1073,3 +1073,4 @@ input:focus {
   .nav-cart a {padding: 0 7px;}
 
 }
+
