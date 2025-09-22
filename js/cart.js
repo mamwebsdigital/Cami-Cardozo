@@ -41,29 +41,34 @@ function renderCart() {
     li.appendChild(info);
 
     // Select de talles (si tiene)
-  if (Array.isArray(item.tallas) && item.tallas.length > 0) {
-    const select = document.createElement("select");
-    select.classList.add("tallas-select");
-  
-    item.tallas.forEach(talla => {
-      const option = document.createElement("option");
-      option.value = talla;
-      option.textContent = talla;
-  
-      if (item.selectedTalla === talla) {
-        option.selected = true;
-      }
-  
-      select.appendChild(option);
-    });
-  
-    select.addEventListener("change", e => {
-      item.selectedTalla = e.target.value;
-      saveCart();
-    });
-  
-    li.appendChild(select);
+if (Array.isArray(item.tallas) && item.tallas.length > 0) {
+  const select = document.createElement("select");
+  select.classList.add("tallas-select");
+
+  item.tallas.forEach(talla => {
+    const option = document.createElement("option");
+    option.value = talla;
+    option.textContent = talla;
+
+    if (item.selectedTalla === talla) {
+      option.selected = true;
+    }
+
+    select.appendChild(option);
+  });
+
+  select.addEventListener("change", e => {
+    item.selectedTalla = e.target.value;
+    saveCart();
+  });
+
+  if (!item.selectedTalla) {
+    item.selectedTalla = item.tallas[0];
+    saveCart();
   }
+
+  li.appendChild(select);
+}
 
     // Controles cantidad
     const controls = document.createElement("div");
@@ -266,6 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
